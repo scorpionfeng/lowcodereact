@@ -1,4 +1,5 @@
 import React, {useRef, useState} from 'react';
+import { useCallbackRef } from './hook/useCallbackRef';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default() => {
@@ -18,7 +19,9 @@ export default() => {
       startY:0,
     })
 
-    const mousedown = (e:React.MouseEvent<HTMLDivElement>) => {
+    
+
+    const mousedown = useCallbackRef((e:React.MouseEvent<HTMLDivElement>) => {
       console.log('mousedown execute');
       
       document.addEventListener('mousemove',mousemove)
@@ -29,25 +32,27 @@ export default() => {
         startX:e.clientX,
         startY:e.clientY,
       }
-    }
+    });
 
-    const mousemove = (e:MouseEvent) => {
+    const mousemove = useCallbackRef((e:MouseEvent) => {
       
       const {startX,startY,startLeft,startTop} = dragData.current
       const durX=e.clientX-startX;
       const durY=e.clientY-startY;
+      //打印发现输出的值一直是旧值,不是新值
+
       console.log(JSON.stringify(pos));
-      
+
       setPos({
         top:startTop+durY,
         left:startLeft+durX
       })
-    }
+    })
 
-    const mouseup = (e:MouseEvent) => {
+    const mouseup = useCallbackRef((e:MouseEvent) => {
       document.removeEventListener('mousemove',mousemove);
       document.removeEventListener('mouseup',mouseup);
-    }
+    })
     return {mousedown}
 
   })();
