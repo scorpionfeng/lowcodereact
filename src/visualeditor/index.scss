@@ -14,7 +14,7 @@ $primary:#409eff;
     right:20px;
     bottom:20px;
     background-color: white;
-    &::before{
+    &:before{
         position: fixed;
         top:0;
     }
@@ -29,7 +29,33 @@ $primary:#409eff;
         left:0;
         bottom: 0;
         width: $menuSize;
-        background-color: #409eff;
+        background-color:white;
+        border-right: solid 1px $ibc;
+        padding: 20px;
+        box-sizing: border-box;
+        .visual-editor-menu-item{
+            border: solid 2px $ibc;
+            margin-bottom: 20px;
+            position: relative;
+            padding: 28px 16px;
+            text-align: center;
+
+            &:hover{
+                border-color: $primary;
+                cursor: move;
+            }
+            .visual-editor-menu-item-name {
+             position: absolute; 
+             top:-2px;
+             left:-2px;
+             background-color: $primary;
+             color:white;
+             font-size: 12px;
+             line-height: 28px;
+             padding: 0 20px;
+            }
+          
+        }
     }
     &.visual-editor-operator{
         top:0;
