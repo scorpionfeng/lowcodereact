@@ -1,0 +1,60 @@
+$headSize:60px;//编辑器头高度
+$menuSize:275px;// 编辑器菜单调试
+$operatorSize:275px;//右侧操作栏调试
+$ibc:#dcdfe6;//边框色
+$ibl:#ebeef5;//边框色(轻)
+$itc:#314659;//字体颜色 
+$icc:rgba(0,0,0,0.45);//图标颜色 
+$boxShadowColor:#f0f1f2;//阴影颜色 
+$primary:#409eff;
+.visual-editor {
+    position: fixed;
+    top:20px;
+    left:20px;
+    right:20px;
+    bottom:20px;
+    background-color: white;
+    &::before{
+        position: fixed;
+        top:0;
+    }
+
+    .visual-editor-operator ,
+.visual-editor-body,
+.visual-editor-head,
+.visual-editor-menu{
+    position: absolute;
+    &.visual-editor-menu{
+        top:0;
+        left:0;
+        bottom: 0;
+        width: $menuSize;
+        background-color: #409eff;
+    }
+    &.visual-editor-operator{
+        top:0;
+        right:0;
+        bottom: 0;
+        width: $operatorSize;
+        background-color:brown;
+    }
+    &.visual-editor-head{
+        top:0;
+        left:$menuSize;
+        right:$operatorSize;
+        height: $headSize;
+        background-color: purple;
+        z-index: 1;
+    }
+    &.visual-editor-body{
+        top:$headSize;
+        left:$menuSize;
+        right: $operatorSize;
+        background-color: yellow;
+        padding-bottom: 300px;
+
+    }
+}
+
+}
+

@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Main from "./main";
+import App from './App';
+import { VisualEditor } from './VisualEditor';
 
 ReactDOM.render(
-    <Main />,
+    <VisualEditor />,
   document.getElementById('root')
 );
 
