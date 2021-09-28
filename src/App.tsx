@@ -16,13 +16,17 @@ function App() {
       blocks:[
         {componentKey:'text',
       top:100,
-    left:100},
+    left:100,
+    adjustPosition:false
+  },
         {componentKey:'button',
       top:200,
-    left:200},
+    left:200,
+    adjustPosition:false},
         {componentKey:'input',
       top:300,
-    left:300},
+    left:300,
+    adjustPosition:false},
       ]
     } as VisualEditorValue
   });
