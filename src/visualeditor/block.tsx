@@ -14,8 +14,9 @@ export default function VisualEditorBlock(props:IProp){
     return {
       top:`${props.block.top}px`,
       left:`${props.block.left}px`,
+      opacity: props.block.adjustPosition?'0':''
     }
-  },[props.block.top,props.block.left])
+  },[props.block.top,props.block.left,props.block.adjustPosition])
 
   const component=props.config.componentMap[props.block.componentKey]
   let render:any;
