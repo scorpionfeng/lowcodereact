@@ -21,6 +21,14 @@ export interface VisualEditorComponent{
   render:()=>JSX.Element,
 }
 
+export function createVisualBlock({top,left,component}:{top:number,left:number,component:VisualEditorComponent}):VisualBlock{
+  return {
+    componentKey:component.key,
+    top,
+    left,
+  }
+
+}
 
 export function createVisualConfig() {
   //用于block数据,通过key找到component对象,使用render属性渲染内容至container窗口里面
