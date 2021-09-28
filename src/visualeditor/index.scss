@@ -14,6 +14,7 @@ $primary:#409eff;
     right:20px;
     bottom:20px;
     background-color: white;
+    overflow: hidden;
     &:before{
         position: fixed;
         top:0;
@@ -76,11 +77,23 @@ $primary:#409eff;
         top:$headSize;
         left:$menuSize;
         right: $operatorSize;
-        background-color: yellow;
+        background-color: #f6f6f634;
         padding-bottom: 300px;
-
+        overflow: auto;
+        display: flex;
+        justify-content: center6;
+        .visual-editor-container{
+            background-color: white;
+            margin-top: 100px;
+            
+        }
     }
 }
-
+}
+.visual-editor-container{
+    position:relative;
+    .visual-editor-block{
+        position: absolute;
+    }
 }
 

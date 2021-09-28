@@ -1,6 +1,6 @@
 
 
-export interface VisualEditorBlock{
+export interface VisualBlock{
   componentKey:string;
   top:number;
   left:number;
@@ -11,7 +11,7 @@ export interface VisualEditorValue{
     height:number;
     width:number
   }
-  blocks:VisualEditorBlock[];
+  blocks:VisualBlock[];
 }
 
 export interface VisualEditorComponent{
