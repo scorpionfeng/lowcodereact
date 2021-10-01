@@ -4,17 +4,18 @@ import { VisualEditorValue,VisualConfig, createVisualBlock } from './util';
 import './index.scss';
 import VisualEditorBlock from './block';
 import { useCallbackRef } from '../hook/useCallbackRef';
-import { VisualEditorComponent } from './util';
+import { VisualEditorComponent ,VisualBlock} from './util';
 
 export  const  VisualEditor:React.FC<{
   value:VisualEditorValue,
   onChange:(val:VisualEditorValue)=>void,
-  config:VisualConfig
+  config:VisualConfig,
 }>=(props)=>{
   console.log(props);
 
 
-  const containerRef=useRef({} as HTMLDivElement)
+  const containerRef=useRef({} as   HTMLDivElement)
+
 
   const containerStyles=useMemo(()=>{
     return {
@@ -22,6 +23,32 @@ export  const  VisualEditor:React.FC<{
       width: `${props.value.container.width}px`,
     }
   },[props.value.container.height,props.value.container.width])
+
+
+  const focusData=useMemo(()=>{
+
+    const focus:VisualBlock[]=[]
+    const unFocus:VisualBlock[]=[]
+    props.value.blocks.forEach(block => {(block.focus?focus:unFocus).push(block)})
+    return {
+      focus,unFocus
+    }
+  },[props.value.blocks])
+
+  const methods={
+    updateBlocks:(blocks:VisualBlock[])=>{
+      props.onChange({
+        ...props.value,
+        blocks:[...blocks]
+      })
+    },
+    clearFocus:(eternal?:VisualBlock)=>{
+        (!!eternal?focusData.focus.filter(item=>item!==eternal!):focusData.focus).forEach(
+          block=>{block.focus=false}
+        )
+        methods.updateBlocks(props.value.blocks)
+    }
+  }
 
   const menuDragger=(()=>{
 
@@ -73,6 +100,44 @@ export  const  VisualEditor:React.FC<{
     }
     return block
   })();
+
+  const  focusHander=(()=>{
+    const mousedownBlock=(e:React.MouseEvent<HTMLDivElement>,block:VisualBlock)=>{
+      console.log('点击了block');
+      if(e.shiftKey){
+        if(focusData.focus.length<=1){
+          block.focus=true
+        }else{
+          block.focus=!block.focus
+        }
+        methods.updateBlocks(props.value.blocks)
+
+      }else{
+        if(!block.focus){
+          block.focus=true;
+          methods.clearFocus(block)
+        }
+
+      }
+      
+    }
+    const mousedownContainer=(e:React.MouseEvent<HTMLDivElement>)=>{
+      if(e.target!=e.currentTarget){
+        return 
+      }
+      if(!e.shiftKey){
+        methods.clearFocus()
+      }
+      console.log('点击了 container');
+      
+    }
+
+    return {
+      block:mousedownBlock,
+      container:mousedownContainer
+    }
+
+  })();
   
   return(
   <div  className='visual-editor'>
@@ -93,8 +158,8 @@ export  const  VisualEditor:React.FC<{
     </div>
     <div className="visual-editor-head">head</div>
     <div className="visual-editor-body">
-      <div className="visual-editor-container" style={containerStyles} ref={containerRef}>
-        {props.value.blocks.map((block,index)=>(<VisualEditorBlock key={index} block={block} config={props.config}/>))}
+      <div className="visual-editor-container" style={containerStyles} ref={containerRef} onMouseDown={focusHander.container}>
+        {props.value.blocks.map((block,index)=>(<VisualEditorBlock key={index} block={block} config={props.config} onMousedown={e=>focusHander.block(e,block)}/>))}
       </div>
     </div>
     <div className="visual-editor-operator">operator</div>

@@ -5,6 +5,7 @@ export interface VisualBlock{
   top:number;
   left:number;
   adjustPosition:boolean;
+  focus:boolean;
 }
 
 export interface VisualEditorValue{
@@ -27,7 +28,8 @@ export function createVisualBlock({top,left,component}:{top:number,left:number,c
     componentKey:component.key,
     top,
     left,
-    adjustPosition:true
+    adjustPosition:true,
+    focus:false
   }
 
 }

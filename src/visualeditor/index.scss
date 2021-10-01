@@ -94,7 +94,24 @@ $primary:#409eff;
                     right:0;
                     bottom:0;
                 }
+
+                &.visual-editor-block-focus{
+                    &:before{
+                        content:'';
+                        position:absolute;
+                        $size:4px;
+                        top:-$size;
+                        left:-$size;
+                        right:-$size;
+                        bottom:-$size;
+                        border:dashed 1px $primary
+                        
+                    }
+    
+                }
             }
+
+            
             
         }
     }

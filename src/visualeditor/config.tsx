@@ -1,5 +1,6 @@
 import { createVisualConfig } from "./util";
 import { Button,Input } from "antd";
+
 export const visualConfig=createVisualConfig()
 visualConfig.registryComponent('text',{
   name:'文本',
